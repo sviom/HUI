@@ -48,9 +48,10 @@ function tryLogin() {
     }, function(succeed) {
         delete loggingIn;
 
+        var nowLocation = "https://" + window.location.hostname + "/login";
         if(succeed) {
         // When it succeed login, it try to make a session.
-            $.post("http://localhost:3000/login", {userId : $('#txt_login_id').val()}, function(data) {
+            $.post(nowLocation , {userId : $('#txt_login_id').val()}, function(data) {
                 var info = JSON.parse(data);
                 if(info.result==="done") {
                 // Below code are what to do after made a session.
