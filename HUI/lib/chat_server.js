@@ -17,10 +17,18 @@ var Async = require('async');
 
 //MySQL 접속
 var db = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'adjnj',
+    host: "huimysql.mysql.database.azure.com", 
+    user: "huiadmin@huimysql", 
+    password: "Emrjdnsrkawk2ro", 
+    database: "hui", 
+    port: 3306
 });
+
+// var db = mysql.createConnection({
+//     host     : 'localhost',
+//     user     : 'root',
+//     password : 'adjnj',
+// });
 
 db.query('USE HUI');
 
