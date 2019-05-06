@@ -17,7 +17,8 @@ $(document).ready(function() {
 //Description : 페이지가 뜰 때마다 세션에 저장된 사용자인지 확인
 //Author : Hyunyi Kim
 function verifyUser(){
-    $.post("http://localhost:3000/verify",function(data){
+    var nowLocation = "https://" + window.location.hostname + "/verify";
+    $.post(nowLocation, function (data) {
         var info = JSON.parse(data);
 
         if(info.result==="done") {
