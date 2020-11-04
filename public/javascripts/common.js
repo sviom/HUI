@@ -1,4 +1,5 @@
-﻿// name: Anonymous
+﻿
+// name: Anonymous
 // Description: Initializer
 $(document).ready(function() {
     socket = io.connect();
