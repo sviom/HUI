@@ -1,22 +1,22 @@
 {
-  "name": "HUI",
-  "version": "0.1.1",
+  "name": "hui",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "async": "^2.6",
+    "async": "^2.6.3",
     "body-parser": "^1.19",
-    "cookie-parser": "^1.4",
-    "debug": "^4.1",
-    "ejs": "^2.6",
-    "express": "^4.16",
-    "express-session": "^1.16.1",
-    "morgan": "^1.9",
-    "mysql": "^2.17.1",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.2.0",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "serve-favicon": "^2.5",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.3.0",
     "step": "^1.0.0"
   }
 }
