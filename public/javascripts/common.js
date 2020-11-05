@@ -1,33 +1,27 @@
-﻿// name: Anonymous
+﻿let HOST_NAME = window.location.hostname;
+if (HOST_NAME.includes("localhost")) {
+    HOST_NAME = "http://localhost:3000";
+} else {
+    HOST_NAME = "https://" + HOST_NAME;
+}
+
+// name: Anonymous
 // Description: Initializer
 $(document).ready(function () {
     socket = io.connect();
-
     initUI();
-    verifyUser();
-
-
+    VerifyUser();
 });
-
-
 
 //name : verifyUser
 //Input : 없음
 //OUTPUT : 세션이 유효할 경우, 로그인 팝업이 사라짐
 //Description : 페이지가 뜰 때마다 세션에 저장된 사용자인지 확인
 //Author : Hyunyi Kim
-function verifyUser() {
-    let hostname = window.location.hostname;
-    if (hostname.includes("localhost")) {
-        hostname = "http://localhost:3000";
-    } else {
-        hostname = "https://" + hostname;
-    }
-
-    var nowLocation = hostname + "/verify";
+function VerifyUser() {
+    var nowLocation = HOST_NAME + "/verify";
     $.post(nowLocation, function (data) {
         var info = JSON.parse(data);
-
         if (info.result === "done") {
             hidePopup();
             getInfo(info.id, function () {

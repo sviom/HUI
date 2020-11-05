@@ -14,15 +14,15 @@ function initLogin(id) {
 
     // Try login when click "login" button or press "Enter" key.
     $('#btn_login_square').click(function() {
-        tryLogin();
+        TryLogin();
     });
 
     enterKeyBind('#txt_login_id', function() {
-        tryLogin();
+        TryLogin();
     });
 
     enterKeyBind('#txt_login_pw', function() {
-        tryLogin();
+        TryLogin();
     });
 
     // If it receive parameter, fill id textbox.
@@ -34,7 +34,7 @@ function initLogin(id) {
 //Function Name: tryLogin
 //Description: Try login.
 //Author: JoonChul Kim
-function tryLogin() {
+function TryLogin() {
     if(typeof(loggingIn) != 'undefined' && loggingIn) {
         alert("로그인 중입니다.\n잠시만 기다려주세요.");
         return false;
