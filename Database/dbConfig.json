@@ -1,0 +1,17 @@
+{
+    "Dev": {
+        "host": "localhost",
+        "user": "postgres",
+        "password": "Emrjdnsrkak2ro",
+        "database": "postgres",
+        "port": 5432
+    },
+    "Production": {
+        "host": "hui.postgres.database.azure.com",
+        "user": "huiadmin",
+        "password": "Emrjdnsrkak2ro",
+        "database": "<name-of-database>",
+        "port": 5432,
+        "ssl:": true
+    }
+}
