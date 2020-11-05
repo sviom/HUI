@@ -22,7 +22,7 @@ CREATE TABLE memberinfo (
   nickname varchar(20) NOT NULL,
   photo varchar(20000) DEFAULT NULL,
   personalSetting varchar(300) NOT NULL DEFAULT '{ }',
-  r_indexList varchar(500) DEFAULT '{"num": 0}'  
+  r_indexList varchar(500) DEFAULT '{"num": 0, "rIndexList": []}'  
   
 );
 
