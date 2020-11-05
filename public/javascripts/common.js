@@ -1,7 +1,6 @@
-﻿
-// name: Anonymous
+﻿// name: Anonymous
 // Description: Initializer
-$(document).ready(function() {
+$(document).ready(function () {
     socket = io.connect();
 
     initUI();
@@ -17,18 +16,25 @@ $(document).ready(function() {
 //OUTPUT : 세션이 유효할 경우, 로그인 팝업이 사라짐
 //Description : 페이지가 뜰 때마다 세션에 저장된 사용자인지 확인
 //Author : Hyunyi Kim
-function verifyUser(){
-    var nowLocation = "https://" + window.location.hostname + "/verify";
+function verifyUser() {
+    let hostname = window.location.hostname;
+    if (hostname.includes("localhost")) {
+        hostname = "http://localhost:3000";
+    } else {
+        hostname = "https://" + hostname;
+    }
+
+    var nowLocation = hostname + "/verify";
     $.post(nowLocation, function (data) {
         var info = JSON.parse(data);
 
-        if(info.result==="done") {
+        if (info.result === "done") {
             hidePopup();
-            getInfo(info.id, function() {
+            getInfo(info.id, function () {
                 startService();
             });
         } else {
-            showPopup('login.html', function() {
+            showPopup('login.html', function () {
                 initLogin();
             }); // show login popup.
         }
@@ -40,8 +46,7 @@ function verifyUser(){
 // OUTPUT : Success or Fail Message
 // Description : 회원가입용 함수 / 성공 또는 실패에 따라서 틀려진다.
 // Author : Hanbyul Kang
-function createMember(inUserData,callback)
-{
+function createMember(inUserData, callback) {
     //chat_server.js 파일에 있는 createMemeber함수에 userData를 넘겨준다.
     socket.emit('createMember', JSON.stringify(inUserData));
 
@@ -53,20 +58,20 @@ function createMember(inUserData,callback)
 //Output_Data : 'success' or 'fail'
 //Description : 사용자가 로그인 폼에 입력한 정보가 올바른지 판단
 //Author: Hyuni Kim
-function verifyMember(inUserData,callback){
-    socket.emit('verifyMember',JSON.stringify(inUserData));
-//  socket.on을 따로 작성지 않고, socket.emit의 콜백함수로 작성할 경우
-//  socket.emit('verifyMember',JSON.stringify(inUserData),
-//          function(result){
-//      if(result.verify){
-//          callback('success');
-//      }else{
-//          callback('fail');
-//      }
-//  });
+function verifyMember(inUserData, callback) {
+    socket.emit('verifyMember', JSON.stringify(inUserData));
+    //  socket.on을 따로 작성지 않고, socket.emit의 콜백함수로 작성할 경우
+    //  socket.emit('verifyMember',JSON.stringify(inUserData),
+    //          function(result){
+    //      if(result.verify){
+    //          callback('success');
+    //      }else{
+    //          callback('fail');
+    //      }
+    //  });
 
-    socket.on('verifyMemberResult',function(result){
-        if(typeof(callback) != 'undefined') {
+    socket.on('verifyMemberResult', function (result) {
+        if (typeof (callback) != 'undefined') {
             callback(result.verify);
         } else {
             return result.verify;
@@ -80,10 +85,10 @@ function verifyMember(inUserData,callback){
 //Input : userid, friend id
 //Output : result message ( true or false )
 //Author : Hanbyul Kang
-function deleteFriends(userID,friendId,callback) {
+function deleteFriends(userID, friendId, callback) {
     console.log("in DeleteFriends");
-    socket.emit('deleteFriend',JSON.stringify({memID : userID, friendID : friendId}));
-    socket.on('deleteFriend',function(result){
+    socket.emit('deleteFriend', JSON.stringify({ memID: userID, friendID: friendId }));
+    socket.on('deleteFriend', function (result) {
         callback(result);
     });
 }
@@ -93,18 +98,18 @@ function deleteFriends(userID,friendId,callback) {
 // Input : none
 // Output : result message ( true or false )
 // Author : Hanbyul Kang
-function sendForCreateRoom(userUID,roomName,callback) {
+function sendForCreateRoom(userUID, roomName, callback) {
     // cretae Message to JSON
     console.log("userID : " + userUID + "   room name : " + roomName);
     // get now time
     var createdTime = new Date().getTime();
 
-    var message = JSON.stringify({ 'userUID' : userUID, 'roomName':roomName, 'createdTime' : createdTime});
+    var message = JSON.stringify({ 'userUID': userUID, 'roomName': roomName, 'createdTime': createdTime });
     console.log("Send data to server : " + message);
 
     console.log("sendforcreateroom forsend message : " + message);
-    socket.emit('sendForCreateRoom',message);
-    socket.on('sendForCreateRoomResult',function (result) {
+    socket.emit('sendForCreateRoom', message);
+    socket.on('sendForCreateRoomResult', function (result) {
         console.log("Created room result : " + result);
         // result Return
         callback(result);
@@ -118,14 +123,14 @@ function sendForCreateRoom(userUID,roomName,callback) {
 // input : user id, room name
 // output : chat list (JSON)
 // Author : Hanbyul Kang
-function readChatList(userUID,roomName,callback) {
-    var message = JSON.stringify({ memID: userUID, roomName : roomName});
+function readChatList(userUID, roomName, callback) {
+    var message = JSON.stringify({ memID: userUID, roomName: roomName });
     //for debug
-    console.log("readchatList data for send : "  + message);
+    console.log("readchatList data for send : " + message);
     // data send to server
-    socket.emit('readChatContentList',message);
+    socket.emit('readChatContentList', message);
     // accept data from server
-    socket.on('readChatContentList',function(outputData){
+    socket.on('readChatContentList', function (outputData) {
         // return JSON data in chatlist
         // if first data is '0', error!
         callback(outputData);
@@ -151,7 +156,7 @@ function updateChatroomNameFront(r_index, newName, callback) {
 // input : user id, r_index / friendName
 // output : true / false
 // Author : Hanbyul Kang
-function inviteNewFriend(userUID, friendName, r_index,callback) {
+function inviteNewFriend(userUID, friendName, r_index, callback) {
     var jsonMessage = JSON.stringify({ memID: userUID, friendName: friendName, r_index: r_index })
     console.log("invite new friend json message : " + jsonMessage);
     socket.emit('inviteNewFriend', jsonMessage);
@@ -167,13 +172,13 @@ function inviteNewFriend(userUID, friendName, r_index,callback) {
 //input : user id, room name
 //output : memID, friendName
 //Author : Hanbyul Kang
-function addNewFriends(userID,friendName,callback) {
-    var jsonMessage = JSON.stringify({memID : userID, fList : friendName});
+function addNewFriends(userID, friendName, callback) {
+    var jsonMessage = JSON.stringify({ memID: userID, fList: friendName });
 
     console.log(jsonMessage);
 
-    socket.emit('addNewFriend2',jsonMessage);
-    socket.on('addNewFriend2',function (resultData) {
+    socket.emit('addNewFriend2', jsonMessage);
+    socket.on('addNewFriend2', function (resultData) {
         callback(resultData);
     });
 }
@@ -183,14 +188,14 @@ function addNewFriends(userID,friendName,callback) {
 //input : user id sotred in session
 //output : user information(JSON)
 //Author : Hyunyi Kim
-function getInfo(userId, callback){
-    socket.emit('getUserInfo',userId);
+function getInfo(userId, callback) {
+    socket.emit('getUserInfo', userId);
 
-    socket.on('getUserInfoResult',function(data){
+    socket.on('getUserInfoResult', function (data) {
         //return data.userInfo[0];
         getUserInfo(data.userInfo[0]);
 
-        if(typeof(callback) != 'undefined') {
+        if (typeof (callback) != 'undefined') {
             callback();
         }
     });
@@ -202,7 +207,7 @@ function getInfo(userId, callback){
 //input : -
 //output : user information(JSON)
 //Author : Hyunyi Kim
-function getUserInfo(data){
+function getUserInfo(data) {
     window.userData = data;
     window.settings = JSON.parse(data.settings);
     return data;
@@ -213,10 +218,10 @@ function getUserInfo(data){
 //input : user id
 //output : list of friends(JSON)
 //Author : Hyunyi Kim
-function getFriends(userId,callback){
+function getFriends(userId, callback) {
     socket.emit('checkFriends', userId);
 
-    socket.on('checkFriendsResult',function(data){
+    socket.on('checkFriendsResult', function (data) {
         callback(data);
     });
 }
@@ -226,10 +231,10 @@ function getFriends(userId,callback){
 //input : JSON data (user id and nickname that the user inputs)
 //output : check whether success is true or not
 //Author : Hyunyi Kim
-function changeNickname(inUserData,callback){
-    socket.emit('changeNickname',JSON.stringify(inUserData));
+function changeNickname(inUserData, callback) {
+    socket.emit('changeNickname', JSON.stringify(inUserData));
 
-    socket.on('changeNicknameResult',function(data){
+    socket.on('changeNicknameResult', function (data) {
         callback(data);
     });
 }
@@ -239,10 +244,10 @@ function changeNickname(inUserData,callback){
 //input : JSON data (user id and password that the user inputs)
 //output : check whether success is true or not
 //Author : Hyunyi Kim
-function changePassword(inUserData,callback){
-    socket.emit('changePassword',JSON.stringify(inUserData));
+function changePassword(inUserData, callback) {
+    socket.emit('changePassword', JSON.stringify(inUserData));
 
-    socket.on('changePasswordResult',function(data){
+    socket.on('changePasswordResult', function (data) {
         callback(data);
     });
 }
@@ -253,11 +258,11 @@ function changePassword(inUserData,callback){
 //input : image_url
 //output : check whether success is true or not
 //Author : Hyunyi Kim
-function updatePhoto(inUserData, callback){
+function updatePhoto(inUserData, callback) {
     console.log(inUserData);
     socket.emit('updatePhoto', inUserData);
 
-    socket.on('updatePhotoResult',function(data){
+    socket.on('updatePhotoResult', function (data) {
         callback(data);
     });
 }
@@ -267,10 +272,10 @@ function updatePhoto(inUserData, callback){
 //input : JSON
 //output : check whether success is true or not
 //Author : Hyunyi Kim
-function updateSettings(memID, inUserData, callback){
+function updateSettings(memID, inUserData, callback) {
     socket.emit('updateSettings', memID, inUserData);
 
-    socket.on('updateSettingsResult',function(data){
+    socket.on('updateSettingsResult', function (data) {
         callback(data);
     });
 }
@@ -280,12 +285,12 @@ function updateSettings(memID, inUserData, callback){
 //input : memId and room_name
 //output : success message
 //Author : Hyunyi Kim
-function joinRoom(memID, room, callback){
-    socket.emit('joinRoom',memID, room);
+function joinRoom(memID, room, callback) {
+    socket.emit('joinRoom', memID, room);
 
-    socket.on('joinRoomResult',function(data){
-      if(typeof(callback) != 'undefined')
-        callback(data);
+    socket.on('joinRoomResult', function (data) {
+        if (typeof (callback) != 'undefined')
+            callback(data);
     });
 }
 
@@ -294,15 +299,15 @@ function joinRoom(memID, room, callback){
 //input : user id
 //output : list of chatRoom(JSON)
 //Author : Hyunyi Kim
-function getChatRoom(userId,callback){
+function getChatRoom(userId, callback) {
     socket.emit('getChatRoom', userId);
 
-    socket.on('getChatRoomResult',function(data){
+    socket.on('getChatRoomResult', function (data) {
         callback(data);
     });
 }
 
-function handleMessageProcess(message){
+function handleMessageProcess(message) {
     console.log('====================================================');
     socket.emit('message', message);
 
