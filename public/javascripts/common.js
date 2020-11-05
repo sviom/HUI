@@ -99,9 +99,7 @@ function sendForCreateRoom(userUID, roomName, callback) {
     var createdTime = new Date().getTime();
 
     var message = JSON.stringify({ 'userUID': userUID, 'roomName': roomName, 'createdTime': createdTime });
-    console.log("Send data to server : " + message);
-
-    console.log("sendforcreateroom forsend message : " + message);
+    
     socket.emit('sendForCreateRoom', message);
     socket.on('sendForCreateRoomResult', function (result) {
         console.log("Created room result : " + result);
@@ -204,6 +202,9 @@ function getInfo(userId, callback) {
 function getUserInfo(data) {
     window.userData = data;
     window.settings = JSON.parse(data.settings);
+
+    console.log("윈도우에 저장? ", window.userData);
+
     return data;
 }
 
