@@ -52,15 +52,15 @@ function initNewFriend() {
 
     // Try add a new friend when click "add" button or press "Enter" key.
     $('#btn_add_friend').click(function() {
-        tryAddNewFriend();
+        TryAddNewFriend();
     });
     
     enterKeyBind('#txt_new_friend_id', function() {
-        tryAddNewFriend();
+        TryAddNewFriend();
     });
 }
 
-function tryAddNewFriend() {
+function TryAddNewFriend() {
     if(typeof(adding) != 'undefined' && adding) {
         alert("새 친구를 추가하는 중입니다.\n잠시만 기다려주세요.");
         
@@ -69,7 +69,8 @@ function tryAddNewFriend() {
     
     adding = true;
     
-    var memID = window.userData.id;
+    var memID = window.userData.memid;
+    console.log("저장된 사용자 아이디", window.userData);
     
     if($('#txt_new_friend_id').val() == "") {
         alert('새 친구의 ID를 입력해주세요.');

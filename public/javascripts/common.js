@@ -99,7 +99,7 @@ function sendForCreateRoom(userUID, roomName, callback) {
     var createdTime = new Date().getTime();
 
     var message = JSON.stringify({ 'userUID': userUID, 'roomName': roomName, 'createdTime': createdTime });
-    
+
     socket.emit('sendForCreateRoom', message);
     socket.on('sendForCreateRoomResult', function (result) {
         console.log("Created room result : " + result);
@@ -166,9 +166,6 @@ function inviteNewFriend(userUID, friendName, r_index, callback) {
 //Author : Hanbyul Kang
 function addNewFriends(userID, friendName, callback) {
     var jsonMessage = JSON.stringify({ memID: userID, fList: friendName });
-
-    console.log(jsonMessage);
-
     socket.emit('addNewFriend2', jsonMessage);
     socket.on('addNewFriend2', function (resultData) {
         callback(resultData);
@@ -214,7 +211,7 @@ function getUserInfo(data) {
 //output : list of friends(JSON)
 //Author : Hyunyi Kim
 function getFriends(userId, callback) {
-    console.log("사용자정보",  window.userData);
+    console.log("사용자정보", window.userData);
     console.log("유저이름", userId);
     socket.emit('checkFriends', userId);
 
