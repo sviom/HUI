@@ -19,12 +19,12 @@ function initChatlist() {
 
             for (var i = 0; i < data.chatRoomList.length; i++) {
                 $('#nav_content > div:nth-child(3)').append(
-                    '<div class="chat_list_tuple" onclick="tryJoinRoom(\'' + window.userData.id + '\', \'' + data.chatRoomList[i].r_index + '\')">' +
+                    '<div class="chat_list_tuple" onclick="tryJoinRoom(\'' + window.userData.memid + '\', \'' + data.chatRoomList[i].r_index + '\')">' +
                     '<div>' +
                     '<img src="images/roomicon.png" />' +
                     '</div>' +
                     '<div>' +
-                    '<span class="span_room_title">' + decodeURI(data.chatRoomList[i].roomName) + '</span><br />' +
+                    '<span class="span_room_title">' + decodeURI(data.chatRoomList[i].roomname) + '</span><br />' +
                     '<span class="span_room_info">마지막 대화 내용</span>' +
                     '</div>' +
                     '</div>'
