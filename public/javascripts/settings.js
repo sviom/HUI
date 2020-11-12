@@ -126,7 +126,7 @@ function initSettings() {
             $("#settings_desktop_alert > img").prop("src", "images/set_switch_on.png");
         }
 
-        updateSettings(window.userData.id, settings, function () { });
+        updateSettings(window.userData.memid, settings, function () { });
     });
 
     $("#settings_message_preview").click(function () {
@@ -138,7 +138,7 @@ function initSettings() {
             $("#settings_message_preview > img").prop("src", "images/set_switch_on.png");
         }
 
-        updateSettings(window.userData.id, settings, function () { });
+        updateSettings(window.userData.memid, settings, function () { });
     });
 
     $("#settings_alert_with_sound").click(function () {
@@ -150,7 +150,7 @@ function initSettings() {
             $("#settings_alert_with_sound > img").prop("src", "images/set_switch_on.png");
         }
 
-        updateSettings(window.userData.id, settings, function () { });
+        updateSettings(window.userData.memid, settings, function () { });
     });
 
     // General Settings Event Binding
@@ -160,7 +160,7 @@ function initSettings() {
         $("#settings_sendtype_0 > div > img").prop("src", "images/set_radio_on.png");
         $("#settings_sendtype_1 > div > img").prop("src", "images/set_radio_off.png");
 
-        updateSettings(window.userData.id, settings, function () { });
+        updateSettings(window.userData.memid, settings, function () { });
     });
 
     $("#settings_sendtype_1").click(function () {
@@ -169,7 +169,7 @@ function initSettings() {
         $("#settings_sendtype_0 > div > img").prop("src", "images/set_radio_off.png");
         $("#settings_sendtype_1 > div > img").prop("src", "images/set_radio_on.png");
 
-        updateSettings(window.userData.id, settings, function () { });
+        updateSettings(window.userData.memid, settings, function () { });
     });
 
 
