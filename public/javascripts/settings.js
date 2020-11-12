@@ -63,7 +63,7 @@ function initSettings() {
     if (window.userData.photo !== "null")
         $('#profileImage').css('background-image', 'url(' + window.userData.photo + ')');
 
-    $('#settings_account > div:nth-child(2) > strong').html(decodeURI(window.userData.nickname) + ' (' + decodeURI(window.userData.id) + ')');
+    $('#settings_account > div:nth-child(2) > strong').html(decodeURI(window.userData.nickname) + ' (' + decodeURI(window.userData.memid) + ')');
 
     if (typeof (settings) == 'undefined' || settings === null || settings === "null") {
         settings = {
@@ -216,7 +216,7 @@ function tryChangeNickname() {
 
     changing = true;
 
-    var memID = window.userData.id;
+    var memID = window.userData.memid;
 
     if ($('#txt_change_nickname').val() == "") {
         alert('모든 칸을 채워주세요.');
@@ -248,26 +248,26 @@ function initChangePassword() {
 
     // Try sign up when click "change" button or press "Enter" key.
     $('#txt_change_pasword_square').click(function () {
-        tryChangePassword();
+        TryChangePassword();
     });
 
     enterKeyBind('#txt_change_pasword_current_pw', function () {
-        tryChangePassword();
+        TryChangePassword();
     });
 
     enterKeyBind('#txt_change_pasword_new_pw', function () {
-        tryChangePassword();
+        TryChangePassword();
     });
 
     enterKeyBind('#txt_change_pasword_new_pw_re', function () {
-        tryChangePassword();
+        TryChangePassword();
     });
 }
 
 //Function Name: tryChangePassword
 //Description: Try change password.
 //Author: JoonChul Kim
-function tryChangePassword() {
+function TryChangePassword() {
     if (typeof (changing) != 'undefined' && changing) {
         alert("암호 변경 중입니다.\n잠시만 기다려주세요.");
 
@@ -276,7 +276,7 @@ function tryChangePassword() {
 
     changing = true;
 
-    var memID = window.userData.id;
+    var memID = window.userData.memid;
 
     if ($('#txt_change_pasword_current_pw').val() == "" || $('#txt_change_pasword_new_pw').val() == "" || $('#txt_change_pasword_new_pw_re').val() == "") {
         alert('모든 칸을 채워주세요.');
@@ -293,7 +293,7 @@ function tryChangePassword() {
             if (result.success) {
                 alert("암호가 변경되었습니다.\n다시 로그인해주세요.");
 
-                $.get("http://192.168.60.100:3000/logout", function (data) {
+                $.get(HOST_NAME + "/logout", function (data) {
                     if (data === 'logout') {
                         document.location.reload();
                     }
