@@ -8,7 +8,7 @@ function initChatlist() {
         showPopup('newChatRoom.html', initNewChatRoom);
     });
 
-    getChatRoom(window.userData.id, function (data) {
+    getChatRoom(window.userData.memid, function (data) {
         if (!data.chatRoomList) {
             $('#nav_content > div:nth-child(2)').css('text-align', 'center');
             $('#nav_content > div:nth-child(2)').html('<span style="margin: 20px; display: inline-block;">대화가 없어요 T-T</span>');
