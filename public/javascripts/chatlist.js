@@ -1,5 +1,5 @@
 /*** Initialize Chatlist ***/
-function initChatlist() {
+function InitChatlist() {
     $('nav').animate({
         scrollTop: $('#btn_new_chat').height() + 10
     }, 'fast');
@@ -19,7 +19,7 @@ function initChatlist() {
 
             for (var i = 0; i < data.chatRoomList.length; i++) {
                 $('#nav_content > div:nth-child(3)').append(
-                    '<div class="chat_list_tuple" onclick="tryJoinRoom(\'' + window.userData.memid + '\', \'' + data.chatRoomList[i].r_index + '\')">' +
+                    '<div class="chat_list_tuple" onclick="TryJoinRoom(\'' + window.userData.memid + '\', \'' + data.chatRoomList[i].r_index + '\')">' +
                     '<div>' +
                     '<img src="images/roomicon.png" />' +
                     '</div>' +
@@ -66,7 +66,7 @@ function TryCreateRoom() {
             if (data.boolResult == 'true') {
                 noti("HUI", "새로운 채팅방이 생성되었습니다.", true);
                 hidePopup();
-                initChatlist();
+                InitChatlist();
             } else {
                 noti("HUI", "새로운 채팅방 생성에 실패했습니다.", true);
             }
@@ -76,8 +76,10 @@ function TryCreateRoom() {
     }
 }
 
-function tryJoinRoom(memId, rIndex) {
-    joinRoom(memId, rIndex, function (result) {
+function TryJoinRoom(memId, rIndex) {
+    console.log("방들어가기", memId, rIndex);
+
+    JoinRoom(memId, rIndex, function (result) {
         if (result.success) {
             $('#header_room_name').html(decodeURI(result.roomName));
             $('#chat').html('');

@@ -30,7 +30,7 @@ function initUI() {
             url: "./modules/chatlist.html"
         }).done(function(page) {
             $('#nav_content').html(page);
-            initChatlist();
+            InitChatlist();
         });
 
         $('#btn_friends').prop('src', 'images/btn_friends_grey.png');
@@ -80,8 +80,8 @@ function initUI() {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13') {
             handleMessageProcess({
-                "id": window.userData.id,
-                "sender": window.userData.id,
+                "id": window.userData.memid,
+                "sender": window.userData.memid,
                 "nick": window.userData.nickname,
                 "room": window.roomData.r_index,
                 "text": $('#typebox > textarea').val()
@@ -153,7 +153,7 @@ function startService() {
         url: "./modules/chatlist.html"
     }).done(function(page) {
         $('#nav_content').html(page);
-        initChatlist();
+        InitChatlist();
     }); // show chatting room list. this process will *removed* when completely implement login function.
 
     socket.on('message',function(message){

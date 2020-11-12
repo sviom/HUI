@@ -133,12 +133,10 @@ function readChatList(userUID, roomName, callback) {
 // Input : r_index / new Room Name
 // Output :
 // Author : Hanbyul Kang
-function updateChatroomNameFront(r_index, newName, callback) {
-    console.log("In update chat room name");
+function UpdateChatroomNameFront(r_index, newName, callback) {
     var jsonMessage = JSON.stringify({ r_index: r_index, newName: newName });
     socket.emit('updateChatroomName', jsonMessage);
     socket.on('updateChatroomNameFront', function (resultData) {
-        console.log("update chatroom name result : " + resultData);
         callback(resultData);
     });
 }
@@ -148,7 +146,7 @@ function updateChatroomNameFront(r_index, newName, callback) {
 // input : user id, r_index / friendName
 // output : true / false
 // Author : Hanbyul Kang
-function inviteNewFriend(userUID, friendName, r_index, callback) {
+function InviteNewFriend(userUID, friendName, r_index, callback) {
     var jsonMessage = JSON.stringify({ memID: userUID, friendName: friendName, r_index: r_index })    
     socket.emit('inviteNewFriend', jsonMessage);
     socket.on('inviteNewFriend', function (resultData) {
@@ -276,7 +274,7 @@ function updateSettings(memID, inUserData, callback) {
 //input : memId and room_name
 //output : success message
 //Author : Hyunyi Kim
-function joinRoom(memID, room, callback) {
+function JoinRoom(memID, room, callback) {
     socket.emit('joinRoom', memID, room);
 
     socket.on('joinRoomResult', function (data) {
