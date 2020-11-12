@@ -77,8 +77,6 @@ function TryCreateRoom() {
 }
 
 function TryJoinRoom(memId, rIndex) {
-    console.log("방들어가기", memId, rIndex);
-
     JoinRoom(memId, rIndex, function (result) {
         if (result.success) {
             $('#header_room_name').html(decodeURI(result.roomName));
