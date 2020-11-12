@@ -9,7 +9,7 @@ function initFriends() {
     });
 
 	getFriends(window.userData.memid, function(data) {
-		$('#nav_content > div:nth-child(2)').html("");
+        $('#nav_content > div:nth-child(2)').html("");
 
         if(typeof(data.friendList.length) != 'undefined' && data.friendList.length != 0) {
             $('#nav_content > div:nth-child(2)').css('text-align', '');

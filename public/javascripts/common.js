@@ -200,7 +200,7 @@ function getUserInfo(data) {
     window.userData = data;
     window.settings = JSON.parse(data.settings);
 
-    console.log("윈도우에 저장? ", window.userData);
+    console.log("윈도우에 저장함 ", window.userData);
 
     return data;
 }
@@ -211,8 +211,6 @@ function getUserInfo(data) {
 //output : list of friends(JSON)
 //Author : Hyunyi Kim
 function getFriends(userId, callback) {
-    console.log("사용자정보", window.userData);
-    console.log("유저이름", userId);
     socket.emit('checkFriends', userId);
 
     socket.on('checkFriendsResult', function (data) {
