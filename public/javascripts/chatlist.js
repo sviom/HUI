@@ -78,7 +78,6 @@ function TryCreateRoom() {
 
 function tryJoinRoom(memId, rIndex) {
     joinRoom(memId, rIndex, function (result) {
-        console.log(JSON.stringify(result));
         if (result.success) {
             $('#header_room_name').html(decodeURI(result.roomName));
             $('#chat').html('');

@@ -149,8 +149,7 @@ function updateChatroomNameFront(r_index, newName, callback) {
 // output : true / false
 // Author : Hanbyul Kang
 function inviteNewFriend(userUID, friendName, r_index, callback) {
-    var jsonMessage = JSON.stringify({ memID: userUID, friendName: friendName, r_index: r_index })
-    console.log("invite new friend json message : " + jsonMessage);
+    var jsonMessage = JSON.stringify({ memID: userUID, friendName: friendName, r_index: r_index })    
     socket.emit('inviteNewFriend', jsonMessage);
     socket.on('inviteNewFriend', function (resultData) {
         console.log("invite result data : " + resultData);

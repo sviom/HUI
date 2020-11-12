@@ -56,7 +56,6 @@ function initUI() {
     $('#header_btn_more').click(function(e) {
         if($('#room_menu').css('display') == 'none') {
             $('#room_menu').css('right', $(window).width() - e.clientX);
-            console.log($(window).width());
             $('#room_menu').css('top', e.clientY);
             $('#room_menu').show();
         } else

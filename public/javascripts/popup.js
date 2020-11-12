@@ -1,7 +1,7 @@
 function initInviteFriend() {
 	$('.btn_popup_negative').click(function() { hidePopup() });
 
-    getFriends(window.userData.id, function(data) {
+    getFriends(window.userData.memid, function(data) {
         $('#list_friends').html("");
 
         if(typeof(data.friendList.length) != 'undefined' && data.friendList.length != 0) {
@@ -41,7 +41,7 @@ function selectFriendToInvite(selected, selectedId) {
 	$('.btn_popup_positive').unbind();
 	$('.btn_popup_positive').click(function() {
 		alert(window.userData.id + " / " + selectedId + " / " + window.roomData.r_index)
-		inviteNewFriend(window.userData.id, selectedId, window.roomData.r_index);
+		inviteNewFriend(window.userData.memid, selectedId, window.roomData.r_index);
 	});
 }
 
