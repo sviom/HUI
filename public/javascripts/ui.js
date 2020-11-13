@@ -74,6 +74,10 @@ function initUI() {
         });
     });
 
+    $('#room_menu > li:nth-child(3)').click(function (e) {
+        LeaveRoom();
+    });
+
     // Enter Key Event Binding to send messages.
 
     $('#typebox > textarea').keypress(function (event) {
@@ -252,4 +256,19 @@ function appendNewMessage(msg) {
     $('#chat').animate({
         scrollTop: $('#chat').prop('scrollHeight')
     }, 1);
+}
+
+function LeaveRoom() {
+    if (!window.roomData)
+        return;
+
+    let leaveData = {
+        roomIndex: window.roomData.r_index,
+        memId: window.userData.memid
+    };
+
+    leaveRoom(leaveData, function (result) {
+        if (result)
+            document.location.reload();
+    });
 }

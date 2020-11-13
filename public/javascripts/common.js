@@ -301,3 +301,10 @@ function handleMessageProcess(message) {
     socket.emit('message', message);
 
 }
+
+function leaveRoom(userData, callback){
+    socket.emit('getOutRoom', userData);
+    socket.on('getOutRoomFront', function (data) {
+        callback(data);
+    });
+}
