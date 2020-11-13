@@ -3,7 +3,6 @@ function initInviteFriend() {
 
     getFriends(window.userData.memid, function (data) {
         $('#list_friends').html("");
-
         if (typeof (data.friendList.length) != 'undefined' && data.friendList.length != 0) {
             $('#list_friends').css('text-align', '');
             for (var i = 0; i < data.friendList.length; i++) {
@@ -16,7 +15,7 @@ function initInviteFriend() {
                 name = decodeURI(data.friendList[i].nickname);
 
                 $('#list_friends').append(
-                    '<div class="popup_list_tuple" onclick="selectFriendToInvite(this, \'' + data.friendList[i].memID + '\')">' +
+                    '<div class="popup_list_tuple" onclick="selectFriendToInvite(this, \'' + data.friendList[i].memid + '\')">' +
                     '<div>' +
                     '<div class="popup_list_pic"  style="background-image: url(\'' + profilePicture + '\')"></div>' +
                     '</div>' +
@@ -40,8 +39,9 @@ function selectFriendToInvite(selected, selectedId) {
 
     $('.btn_popup_positive').unbind();
     $('.btn_popup_positive').click(function () {
-        console.log("ddd");
-        alert(window.userData.memid + " / " + selectedId + " / " + window.roomData.r_index);
+        if (!window.roomData)
+            return;
+
         InviteNewFriend(window.userData.memid, selectedId, window.roomData.r_index);
     });
 }

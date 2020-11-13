@@ -94,11 +94,9 @@ function initUI() {
             event.preventDefault();
             event.stopPropagation();
 
-            var pic;
+            var pic = 'images/roomicon.png';
 
-            if (window.userData.photo == 'null')
-                pic = 'images/roomicon.png';
-            else
+            if (!window.userData.photo)
                 pic = window.userData.photo;
 
             $('#chat').append(
@@ -238,11 +236,9 @@ function dbgNoti(starts) {
 }
 
 function appendNewMessage(msg) {
-    var pic;
+    var pic = 'images/roomicon.png';
 
-    if (!msg.pic)
-        pic = 'images/roomicon.png';
-    else
+    if (msg.pic)
         pic = msg.pic;
 
     $('#chat').append(

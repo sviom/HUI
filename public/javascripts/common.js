@@ -110,24 +110,6 @@ function sendForCreateRoom(userUID, roomName, callback) {
     return false;
 }
 
-// Function name  : readChatList
-// Description : read chat list from database (if success to create chat room or exist chat room )
-// input : user id, room name
-// output : chat list (JSON)
-// Author : Hanbyul Kang
-function readChatList(userUID, roomName, callback) {
-    var message = JSON.stringify({ memID: userUID, roomName: roomName });
-    //for debug
-    console.log("readchatList data for send : " + message);
-    // data send to server
-    socket.emit('readChatContentList', message);
-    // accept data from server
-    socket.on('readChatContentList', function (outputData) {
-        // return JSON data in chatlist
-        // if first data is '0', error!
-        callback(outputData);
-    });
-}
 // Function name : updateChatroomName
 // Descritpion : 대화방 이름 변경
 // Input : r_index / new Room Name
@@ -150,7 +132,6 @@ function InviteNewFriend(userUID, friendName, r_index, callback) {
     var jsonMessage = JSON.stringify({ memID: userUID, friendName: friendName, r_index: r_index })    
     socket.emit('inviteNewFriend', jsonMessage);
     socket.on('inviteNewFriend', function (resultData) {
-        console.log("invite result data : " + resultData);
         callback(resultData);
     });
 }
