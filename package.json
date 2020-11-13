@@ -17,5 +17,8 @@
     "serve-favicon": "^2.5",
     "socket.io": "^2.3.0",
     "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "vue-loader": "^15.9.5"
   }
 }
