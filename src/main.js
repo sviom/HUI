@@ -1,9 +1,10 @@
-import Vue from "vue";
-import App from "./App.vue";
+const Vue = require('vue');
+const App = require('../src/App.vue');
+const Router = require('./routes');
 
 new Vue({
     el: "#app",
-    // router,
+    Router,
     // store,
     render: h => h(App)
 });
