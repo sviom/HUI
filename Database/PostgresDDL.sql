@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS roomlist cascade;
 CREATE TABLE roomlist (
   r_index SERIAL primary key,
   -- roomId integer not null unique,
-  joinedMem varchar(2000) NOT NULL DEFAULT '{ }',
+  joinedMem varchar(2000) NOT NULL DEFAULT '{"memNum":0,"memList":[ ]}',
   roomName varchar(100) NOT NULL
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE memberinfo (
   memPW varchar(500) NOT NULL,
   nickname varchar(20) NOT NULL,
   photo varchar(20000) DEFAULT NULL,
-  personalSetting varchar(300) NOT NULL DEFAULT '{ }',
+  personalSetting varchar(300) NOT NULL DEFAULT '{"Alert":{"DesktopAlert":true,"MessagePreview":false,"AlertWithSound":true},"General":{"SendType":0}}',
   r_indexList varchar(500) DEFAULT '{"num": 0, "rIndexList": []}'  
   
 );
@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS friendlist cascade;
 CREATE TABLE friendlist (
   m_index SERIAL primary key references memberinfo(m_index),
   memId varchar(255) NOT null unique references memberinfo(memid),
-  fList varchar(20000) NOT NULL DEFAULT '{"number": 0, "list": { } }'  
+  fList varchar(20000) NOT NULL DEFAULT '{"number": 0, "flist": { } }'  
 );
 
 DROP TABLE IF EXISTS userparticipatelist cascade;
