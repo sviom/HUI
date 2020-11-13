@@ -157,7 +157,6 @@ function startService() {
     }); // show chatting room list. this process will *removed* when completely implement login function.
 
     socket.on('message', function (message) {
-        console.log("이것은 메시지", message);
         appendNewMessage(message);
     });
 }
@@ -235,10 +234,9 @@ function dbgNoti(starts) {
 }
 
 function appendNewMessage(msg) {
-    console.log("메시지를 보내자", msg);
     var pic;
 
-    if (msg.pic == 'null')
+    if (!msg.pic)
         pic = 'images/roomicon.png';
     else
         pic = msg.pic;
