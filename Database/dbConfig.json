@@ -8,9 +8,9 @@
     },
     "Production": {
         "host": "hui.postgres.database.azure.com",
-        "user": "huiadmin",
-        "password": "Emrjdnsrkak2ro",
-        "database": "<name-of-database>",
+        "user": "huiadmin@hui",
+        "password": "0vnrvjwuTek!",
+        "database": "postgres",
         "port": 5432,
         "ssl:": true
     }
