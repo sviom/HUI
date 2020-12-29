@@ -3,7 +3,8 @@
   "version": "0.1.2",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "dev": "node cross-env NODE_ENV=development ./bin/www",
+    "start": "node cross-env NODE_ENV=production ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19",
